@@ -11,7 +11,13 @@ namespace QR_game.Levels
     {
         public TestLevel()
         {
-            this.AddObject(new Block(30, 30));
+            this.AddObject(new Block(10, 10));
+            Block b = null;
+            this.AddObject(b = new Block(150, 130)
+            {
+                Width = 60f,
+                Height = 20f,
+            });
         }
     }
 }

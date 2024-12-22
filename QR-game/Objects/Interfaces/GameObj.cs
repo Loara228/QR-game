@@ -22,7 +22,7 @@ namespace QR_game.Objects.Interfaces
 
         public virtual void Draw()
         {
-            Graphics.spriteBatch.Draw(_texture, new Microsoft.Xna.Framework.Vector2(X, Y), Microsoft.Xna.Framework.Color.White);
+            Sprite.Draw(this);
         }
 
         public RectangleF Rect
@@ -34,7 +34,7 @@ namespace QR_game.Objects.Interfaces
         public float X
         {
             get => _rect.X;
-            set => _rect.Y = value;
+            set => _rect.X = value;
         }
 
         public float Y
@@ -55,12 +55,12 @@ namespace QR_game.Objects.Interfaces
             set => _rect.Height = value;
         }
 
-        public Texture2D Texture
+        public AnimatedSprite Sprite
         {
-            get => _texture;
+            get => _sprite;
         }
 
-        protected Texture2D _texture;
+        protected AnimatedSprite _sprite;
         private RectangleF _rect;
     }
 }

@@ -27,7 +27,6 @@ namespace QR_game
         {
             Graphics.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            
             Textures.Load(this.Content);
 
             this._level = new TestLevel();
