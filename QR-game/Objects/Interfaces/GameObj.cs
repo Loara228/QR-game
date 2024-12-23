@@ -14,6 +14,13 @@ namespace QR_game.Objects.Interfaces
         {
             this.X = x;
             this.Y = y;
+            this.Width = 32;
+            this.Height = 32;
+        }
+
+        public GameObj() : this(0, 0)
+        {
+
         }
 
         public virtual void Update()
@@ -29,6 +36,19 @@ namespace QR_game.Objects.Interfaces
         {
             get => _rect;
             set => _rect = value;
+        }
+
+        public Microsoft.Xna.Framework.Vector2 Position
+        {
+            get
+            {
+                return new Microsoft.Xna.Framework.Vector2(X, Y);
+            }
+            set
+            {
+                _rect.X = value.X;
+                _rect.Y = value.Y;
+            }
         }
 
         public float X

@@ -34,8 +34,7 @@ namespace QR_game
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            Keyboard.Update();
 
             _level.Update();
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QR_game.Objects
 {
-    public class Block : GameObj
+    public class Block : PhysicsObject
     {
         public Block(float x, float y) : base(x, y)
         {
@@ -24,7 +24,11 @@ namespace QR_game.Objects
 
         public override void Update()
         {
-
+            base.Update();
+            if (Keyboard.Pressed(Microsoft.Xna.Framework.Input.Keys.Space))
+            {
+                velocity = new Microsoft.Xna.Framework.Vector2(3, 3);
+            }
         }
     }
 }
