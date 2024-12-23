@@ -36,12 +36,12 @@ namespace QR_game.Levels
             get => _objects;
         }
 
-        public void AddObject(GameObj obj)
+        public void Add(GameObj obj)
         {
             _objects.Add(obj);
         }
 
-        public void RemoveObject()
+        public void Remove()
         {
             throw new NotImplementedException();
         }

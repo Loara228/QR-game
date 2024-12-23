@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace QR_game.Objects
 {
-    public class Block : PhysicsObject
+    public class Player : PhysicsObject
     {
-        public Block(float x, float y) : base(x, y)
+        public Player(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.Test, 0, 0, 32, 32, 1);
+            _sprite = new AnimatedSprite(Textures.Player, 0, 0, 32, 64, 1);
+            _controller = new Controller();
             Width = 32;
-            Height = 32;
+            Height = 64;
         }
 
         public override void Draw()
@@ -24,6 +25,9 @@ namespace QR_game.Objects
         public override void Update()
         {
             base.Update();
+            _controller.Update(this);
         }
+
+        private Controller _controller;
     }
 }

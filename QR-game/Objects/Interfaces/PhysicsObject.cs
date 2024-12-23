@@ -16,28 +16,21 @@ namespace QR_game.Objects.Interfaces
 
         public override void Update()
         {
-            if (_accelerate)
+            if (MathF.Abs(velocity.X) < friction * 2)
             {
-                velocity.X += acceleration;
+                velocity.X = 0;
             }
             else
             {
-                if (MathF.Abs(velocity.X) < friction * 2)
-                {
-                    velocity.X = 0;
-                }
-                else
-                {
-                    velocity.X -= velocity.X > 0 ? friction : -friction;
-                }
-                if (MathF.Abs(velocity.Y) < friction * 2)
-                {
-                    velocity.Y = 0;
-                }
-                else
-                {
-                    velocity.Y -= velocity.Y > 0 ? friction : -friction;
-                }
+                velocity.X -= velocity.X > 0 ? friction : -friction;
+            }
+            if (MathF.Abs(velocity.Y) < friction * 2)
+            {
+                velocity.Y = 0;
+            }
+            else
+            {
+                velocity.Y -= velocity.Y > 0 ? friction : -friction;
             }
 
             UpdateLimits();
@@ -69,10 +62,7 @@ namespace QR_game.Objects.Interfaces
 
         public Vector2 velocity = new Vector2();
 
-        private bool _accelerate = false;
-
-        private readonly float acceleration = 0.25f;
         private readonly float max_speed = 6f;
-        private readonly float friction = 0.5f;
+        private readonly float friction = 0.35f;
     }
 }
