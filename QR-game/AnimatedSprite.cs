@@ -38,9 +38,9 @@ namespace QR_game
         }
         public void Draw(GameObj from)
         {
-            Graphics.spriteBatch.Draw(
-                _texture, 
-                new Rectangle((int)from.X, (int)from.Y, (int)from.Width, (int)from.Height),
+            Graphics.Draw(
+                _texture,
+                from.Rect,
                 _sourceRectangles[_frameIndex],
                 Color.White);
         }

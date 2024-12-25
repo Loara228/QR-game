@@ -24,8 +24,8 @@ namespace QR_game.Objects
 
         public override void Update()
         {
-            base.Update();
             _controller.Update(this);
+            base.Update();
         }
 
         private Controller _controller;

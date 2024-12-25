@@ -18,6 +18,8 @@ namespace QR_game
         {
             base.Initialize();
 
+            Graphics.Initialize();
+
             Graphics.deviceManager.PreferredBackBufferWidth = 1280;
             Graphics.deviceManager.PreferredBackBufferHeight = 720;
             Graphics.deviceManager.ApplyChanges();
@@ -29,15 +31,14 @@ namespace QR_game
 
             Textures.Load(this.Content);
 
-            this._level = new TestLevel();
+            Game1._level = new TestLevel();
         }
 
         protected override void Update(GameTime gameTime)
         {
             Keyboard.Update();
-
             _level.Update();
-
+            Dev.Update();
             base.Update(gameTime);
         }
 
@@ -47,16 +48,16 @@ namespace QR_game
 
             Graphics.spriteBatch.Begin();
             _level.Draw();
+            Dev.Draw();
             Graphics.spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
-        public Level CurrentLevel
+        public static Level CurrentLevel
         {
             get => _level;
         }
 
-        private Level _level;
+        private static Level _level;
     }
 }

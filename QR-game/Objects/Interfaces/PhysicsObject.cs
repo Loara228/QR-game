@@ -16,7 +16,7 @@ namespace QR_game.Objects.Interfaces
 
         public override void Update()
         {
-            if (MathF.Abs(velocity.X) < friction * 2)
+            if (MathF.Abs(velocity.X) < friction)
             {
                 velocity.X = 0;
             }
@@ -24,7 +24,7 @@ namespace QR_game.Objects.Interfaces
             {
                 velocity.X -= velocity.X > 0 ? friction : -friction;
             }
-            if (MathF.Abs(velocity.Y) < friction * 2)
+            if (MathF.Abs(velocity.Y) < friction)
             {
                 velocity.Y = 0;
             }
@@ -38,6 +38,8 @@ namespace QR_game.Objects.Interfaces
             this.X += velocity.X;
             this.Y += velocity.Y;
         }
+
+        public float Speed() => MathF.Sqrt(MathF.Pow(Math.Abs(this.velocity.X), 2) + MathF.Pow(Math.Abs(this.velocity.Y), 2));
 
         private void UpdateLimits()
         {
@@ -62,7 +64,7 @@ namespace QR_game.Objects.Interfaces
 
         public Vector2 velocity = new Vector2();
 
-        private readonly float max_speed = 6f;
+        public readonly float max_speed = 5.5f;
         private readonly float friction = 0.35f;
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using QR_game.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,8 +36,18 @@ namespace QR_game
             {
                 from.velocity.Y -= ACCELERATION;
             }
+
+            float speed = from.Speed();
+            if (speed > 0)
+            {
+                if (speed > from.max_speed)
+                    speed = from.max_speed;
+                from.velocity.Normalize();
+                from.velocity *= speed;
+
+            }
         }
 
-        private const float ACCELERATION = 2f;
+        private const float ACCELERATION = 0.75f;
     }
 }
