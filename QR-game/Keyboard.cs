@@ -11,23 +11,36 @@ namespace QR_game
     {
         static Keyboard()
         {
+            _pressed = new List<Keys>();
+            _held = new List<Keys>();
             _released = new List<Keys>();
         }
 
         public static void Update()
         {
+            _pressed.Clear();
             _released.Clear();
 
-            _state = Microsoft.Xna.Framework.Input.Keyboard.GetState();
-            _pressed = _state.GetPressedKeys();
+            var pressedKeys = Microsoft.Xna.Framework.Input.Keyboard.GetState().GetPressedKeys();
+
+            foreach(Keys key in pressedKeys)
+                if (!_held.Contains(key))
+                    _pressed.Add(key);
+
+            foreach (Keys key in _held)
+                if (!pressedKeys.Contains(key))
+                    _released.Add(key);
+
+            _held = pressedKeys.ToList();
         }
 
         public static bool Pressed(Keys key) => _pressed.Contains(key);
-        public static bool Down(Keys key) => _state.IsKeyDown(key);
+        public static bool Down(Keys key) => _held.Contains(key);
+        public static bool Released(Keys key) => _released.Contains(key);
 
-        private static Keys[] _pressed;
+        private static List<Keys> _pressed;
+        private static List<Keys> _held;
         private static List<Keys> _released;
-        private static KeyboardState _state;
 
     }
 }
