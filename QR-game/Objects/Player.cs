@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Interfaces;
+﻿using Microsoft.Xna.Framework.Input;
+using QR_game.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,10 @@ namespace QR_game.Objects
         public override void Update()
         {
             _controller.Update(this);
+            if (Keyboard.Pressed(Keys.D))
+                _sprite.Flip = false;
+            else if (Keyboard.Pressed(Keys.A))
+                _sprite.Flip = true;
             base.Update();
         }
 

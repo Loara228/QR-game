@@ -17,8 +17,8 @@ namespace QR_game
         /// <param name="texture"></param>
         /// <param name="sourceX">X координата текстуры для первого кадра</param>
         /// <param name="sourceY">Y координата текстуры для первого кадра</param>
-        /// <param name="sourceWidth">Длина одного спрайта</param>
-        /// <param name="sourceHeight">Ширина одного спрайта</param>
+        /// <param name="sourceWidth">Пиксели (W) одного спрайта</param>
+        /// <param name="sourceHeight">Пиксели (H) одного спрайта</param>
         /// <param name="frames">Кол-во кадров на текстуре</param>
         public AnimatedSprite(
             Texture2D texture,
@@ -40,9 +40,11 @@ namespace QR_game
         {
             Graphics.Draw(
                 _texture,
-                from.Rect,
+                from.Rect.ToXna(),
                 _sourceRectangles[_frameIndex],
-                Color.White);
+                Color.White,
+                0,
+                Flip);
         }
 
         public Texture2D Texture
@@ -61,6 +63,11 @@ namespace QR_game
                 _frameIndex = value - 1;
             }
         }
+
+        public bool Flip
+        {
+            get; set;
+        } = true;
 
         private int _frameIndex = 0;
         private Rectangle[] _sourceRectangles;

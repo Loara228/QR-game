@@ -20,23 +20,33 @@ namespace QR_game
             _pixel.SetData<Color>(new Color[] { Color.White });
         }
 
-        public static void Draw(Texture2D texture, SharpDX.RectangleF rect, Rectangle sourceRect, Color color)
-        {
-            Graphics.Draw(
-                texture,
-                rect.ToXna(),
-                sourceRect,
-                color);
-        }
-
-        public static void Draw(Texture2D texture, Rectangle rect, Rectangle? sourceRect, Color color)
+        public static void Draw(Texture2D texture, Rectangle rect, Rectangle? sourceRect, Color color, float rotationRad = 0, bool flip = false)
         {
             //White = new Color(uint.MaxValue);
+            if (rotationRad == 0)
+            {
+                Graphics.spriteBatch.Draw(
+                    texture,
+                    rect,
+                    sourceRect,
+                    color,
+                    MathHelper.ToRadians(rotationRad),
+                    Vector2.Zero,
+                    flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                    1f);
+                return;
+            }
+            rect.X += rect.Width / 2;
+            rect.Y += rect.Height / 2;
             Graphics.spriteBatch.Draw(
                 texture,
                 rect,
                 sourceRect,
-                color);
+                color,
+                MathHelper.ToRadians(rotationRad),
+                new Vector2(rect.Width / 2, rect.Height / 2),
+                flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                1f);
         }
 
         public static void DrawLine(Vector2 start, Vector2 end, Color color, float width = 1f)
