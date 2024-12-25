@@ -20,7 +20,13 @@ namespace QR_game
         {
             foreach(var obj in Game1.CurrentLevel.Objects)
             {
-                Graphics.FillRectangle(obj.Rect.ToXna(), Color.Red);
+                Graphics.DrawRect(obj.Rect.ToXna(), Color.Red, 2);
+                Graphics.DrawLine(
+                    new Vector2(obj.Rect.X, obj.Rect.Y),
+                    new Vector2(obj.Rect.BottomRight.X,
+                    obj.Rect.BottomRight.Y),
+                    Color.Red,
+                    2);
             }
         }
 

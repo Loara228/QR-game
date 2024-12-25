@@ -15,6 +15,7 @@ namespace QR_game.Objects
             _controller = new Controller();
             Width = 32;
             Height = 64;
+            StaticObject = false;
         }
 
         public override void Draw()

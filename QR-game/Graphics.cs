@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +16,8 @@ namespace QR_game
 
         internal static void Initialize()
         {
-            _p = new Texture2D(deviceManager.GraphicsDevice, 1, 1);
-            _p.SetData<Color>(new Color[] { Color.White });
+            _pixel = new Texture2D(deviceManager.GraphicsDevice, 1, 1);
+            _pixel.SetData<Color>(new Color[] { Color.White });
         }
 
         public static void Draw(Texture2D texture, SharpDX.RectangleF rect, Rectangle sourceRect, Color color)
@@ -30,7 +29,7 @@ namespace QR_game
                 color);
         }
 
-        public static void Draw(Texture2D texture, Rectangle rect, Rectangle sourceRect, Color color)
+        public static void Draw(Texture2D texture, Rectangle rect, Rectangle? sourceRect, Color color)
         {
             //White = new Color(uint.MaxValue);
             Graphics.spriteBatch.Draw(
@@ -40,9 +39,48 @@ namespace QR_game
                 color);
         }
 
+        public static void DrawLine(Vector2 start, Vector2 end, Color color, float width = 1f)
+        {
+            Graphics.spriteBatch.Draw(
+                Graphics._pixel,
+                start,
+                null, // auto
+                color,
+                (float)Math.Atan2((double)(end.Y - start.Y), (double)(end.X - start.X)),
+                new Vector2(0, 0.5f),
+                new Vector2((start - end).Length(), width),
+                SpriteEffects.None,
+                1f);
+        }
+        public static void DrawCircle(Vector2 center, float radius, Color col, float width = 1f, int iterations = 32)
+        {
+            Vector2 prev = Vector2.Zero;
+            for (int i = 0; i < iterations; i++)
+            {
+                float ang = MathHelper.ToRadians(360f / (iterations - 1) * i);
+                Vector2 cur = new Vector2((float)Math.Cos((double)ang) * radius, -(float)Math.Sin((double)ang) * radius);
+                if (i > 0)
+                    Graphics.DrawLine(center + cur, center + prev, col, width);
+                prev = cur;
+            }
+        }
+
+        public static void DrawRect(SharpDX.RectangleF rect, Color color, float width = 1f)
+        {
+            DrawRect(rect.ToXna(), color, width);
+        }
+
+        public static void DrawRect(Rectangle rect, Color color, float width = 1f)
+        {
+            DrawLine(new Vector2(rect.Left, rect.Top), new Vector2(rect.Right, rect.Top), color, width);
+            DrawLine(new Vector2(rect.Right, rect.Top), new Vector2(rect.Right, rect.Bottom), color, width);
+            DrawLine(new Vector2(rect.Right, rect.Bottom), new Vector2(rect.Left, rect.Bottom), color, width);
+            DrawLine(new Vector2(rect.Left, rect.Bottom), new Vector2(rect.Left, rect.Top), color, width);
+        }
+
         public static void FillRectangle(Rectangle rect, Color color)
         {
-            spriteBatch.Draw(_p, rect, color);
+            spriteBatch.Draw(_pixel, rect, color);
         }
 
         public static float Width
@@ -58,6 +96,6 @@ namespace QR_game
         internal static GraphicsDeviceManager deviceManager;
         internal static SpriteBatch spriteBatch;
 
-        private static Texture2D _p;
+        private static Texture2D _pixel;
     }
 }

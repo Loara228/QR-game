@@ -38,11 +38,11 @@ namespace QR_game.Objects.Interfaces
             set => _rect = value;
         }
 
-        public Microsoft.Xna.Framework.Vector2 Position
+        public SharpDX.Vector2 Position
         {
             get
             {
-                return new Microsoft.Xna.Framework.Vector2(X, Y);
+                return new SharpDX.Vector2(X, Y);
             }
             set
             {

@@ -22,28 +22,28 @@ namespace QR_game
         {
             if (Keyboard.Down(Keys.D))
             {
-                from.velocity.X += ACCELERATION;
+                from.HSpeed += ACCELERATION;
             }
             else if (Keyboard.Down(Keys.A))
             {
-                from.velocity.X -= ACCELERATION;
+                from.HSpeed -= ACCELERATION;
             }
             if (Keyboard.Down(Keys.S))
             {
-                from.velocity.Y += ACCELERATION;
+                from.VSpeed += ACCELERATION;
             }
             else if (Keyboard.Down(Keys.W))
             {
-                from.velocity.Y -= ACCELERATION;
+                from.VSpeed -= ACCELERATION;
             }
 
             float speed = from.Speed();
             if (speed > 0)
             {
-                if (speed > from.max_speed)
-                    speed = from.max_speed;
-                from.velocity.Normalize();
-                from.velocity *= speed;
+                //if (speed > from.max_speed)
+                //    speed = from.max_speed;
+                //from.Velocity.Normalize();
+                //from.Velocity *= speed;
 
             }
         }

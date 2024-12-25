@@ -14,6 +14,7 @@ namespace QR_game.Objects
             _sprite = new AnimatedSprite(Textures.Test, 0, 0, 32, 32, 1);
             Width = 32;
             Height = 32;
+            Collidable = true;
         }
 
         public override void Draw()
