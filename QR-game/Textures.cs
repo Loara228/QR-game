@@ -14,7 +14,7 @@ namespace QR_game
         {
             Textures._test = content.Load<Texture2D>("test");
             Textures._player = content.Load<Texture2D>("player");
-            Textures._qr = content.Load<Texture2D>("qr");
+            Textures._qr = content.Load<Texture2D>("qr01");
         }
 
         public static Texture2D Test => _test;

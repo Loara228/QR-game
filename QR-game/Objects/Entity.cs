@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Enemies;
+﻿using Microsoft.Xna.Framework;
+using QR_game.Objects.Enemies;
 using QR_game.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,19 @@ namespace QR_game.Objects
             StaticObject = false;
             Team = Team.Unknown;
 
-            MaxHealth = 100;
+            MaxHealth = 500;
             _health = MaxHealth;
 
             Damage = 5;
+            ID = 1;
+        }
+
+        public void Hit(Entity from, int value)
+        {
+            var vel = new Vector2(this.X - from.X, this.Y - from.Y);
+            vel.Normalize();
+            this.Velocity = vel * 10f;
+            OnDamage(from.Damage);
         }
 
         protected virtual void OnDamage(int value)
@@ -60,6 +70,11 @@ namespace QR_game.Objects
             {
                 this.OnDamage((from as Entity).Damage);
             }
+        }
+
+        public int ID
+        {
+            get; set;
         }
 
         public int Health

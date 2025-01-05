@@ -38,11 +38,15 @@ namespace QR_game
 
         internal static void EnterPressed()
         {
-            int indexStart = Input.IndexOf("8493");
+            int indexStart = Input.IndexOf("8493") + 4;
             if (indexStart > 0)
             {
                 string qrCode = Input.Substring(indexStart, Input.Length - indexStart);
                 System.Diagnostics.Debug.WriteLine(qrCode);
+                if (Int32.TryParse(qrCode, out int qrId))
+                {
+                    Game1.CurrentLevel.HitEnemyById(qrId);
+                }
             }
             else
             {

@@ -17,6 +17,7 @@ namespace QR_game.Objects
             Width = 64;
             Height = 128;
             Team = Enemies.Team.Allies;
+            Damage = 52;
         }
 
         public override void Draw()

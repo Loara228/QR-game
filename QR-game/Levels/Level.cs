@@ -48,9 +48,15 @@ namespace QR_game.Levels
             Graphics.spriteBatch.End();
         }
 
-        public IReadOnlyList<GameObj> Objects
+        public void HitEnemyById(int id)
         {
-            get => _objects;
+            foreach (Entity ent in _objects.OfType<Entity>())
+            {
+                if (ent.Team != _player.Team && ent.ID == id)
+                {
+                    ent.Hit(_player, _player.Damage);
+                }
+            }
         }
 
         public void Add(GameObj obj)
@@ -61,6 +67,11 @@ namespace QR_game.Levels
         public void Remove(GameObj obj)
         {
             _obj2.Add((obj, false));
+        }
+
+        public IReadOnlyList<GameObj> Objects
+        {
+            get => _objects;
         }
 
         private Player _player;

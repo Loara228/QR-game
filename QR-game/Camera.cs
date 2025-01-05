@@ -17,19 +17,20 @@ namespace QR_game
 
         public void Update()
         {
-
+            if (Keyboard.Down(Microsoft.Xna.Framework.Input.Keys.OemPlus))
+            {
+                if (Scale < 0.99)
+                    Scale += 0.01f;
+            }
+            if (Keyboard.Down(Microsoft.Xna.Framework.Input.Keys.OemMinus))
+            {
+                if (Scale > 0.5)
+                    Scale -= 0.01f;
+            }
         }
 
         public Matrix GetMatrix()
         {
-            if (Keyboard.Down(Microsoft.Xna.Framework.Input.Keys.OemPlus))
-            {
-                Scale += 0.01f;
-            }
-            if (Keyboard.Down(Microsoft.Xna.Framework.Input.Keys.OemMinus))
-            {
-                Scale -= 0.01f;
-            }
             return Matrix.CreateTranslation(new Vector3(-_position.X, -_position.Y, 0f)) * Matrix.CreateScale(Scale);
         }
 
