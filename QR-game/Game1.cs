@@ -47,7 +47,7 @@ namespace QR_game
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _level.Draw();
             Graphics.spriteBatch.Begin();
-            Dev.Draw();
+            //Dev.Draw();
             // UI
             Graphics.spriteBatch.End();
             base.Draw(gameTime);

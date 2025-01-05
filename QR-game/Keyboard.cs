@@ -14,6 +14,8 @@ namespace QR_game
             _pressed = new List<Keys>();
             _held = new List<Keys>();
             _released = new List<Keys>();
+
+            Input = string.Empty;
         }
 
         public static void Update()
@@ -34,13 +36,32 @@ namespace QR_game
             _held = pressedKeys.ToList();
         }
 
+        internal static void EnterPressed()
+        {
+            int indexStart = Input.IndexOf("8493");
+            if (indexStart > 0)
+            {
+                string qrCode = Input.Substring(indexStart, Input.Length - indexStart);
+                System.Diagnostics.Debug.WriteLine(qrCode);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("code not found!");
+            }
+            Input = string.Empty;
+        }
+
         public static bool Pressed(Keys key) => _pressed.Contains(key);
         public static bool Down(Keys key) => _held.Contains(key);
         public static bool Released(Keys key) => _released.Contains(key);
 
+        public static string Input
+        {
+            get; set;
+        }
+
         private static List<Keys> _pressed;
         private static List<Keys> _held;
         private static List<Keys> _released;
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using QR_game.Objects;
+using QR_game.Objects.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,8 @@ namespace QR_game.Levels
     {
         public TestLevel()
         {
-            Block b = null;
-            this.Add(b = new Block(150, 130)
-            {
-                Width = 32f,
-                Height = 32f
-            });
+            this.Add(new Block(150, 130));
+            this.Add(new EnemyQR(550, 200));
         }
     }
 }

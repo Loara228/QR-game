@@ -22,7 +22,15 @@ namespace QR_game
 
         public Matrix GetMatrix()
         {
-            return Matrix.CreateTranslation(new Vector3(-_position.X, -_position.Y, 0f));
+            if (Keyboard.Down(Microsoft.Xna.Framework.Input.Keys.OemPlus))
+            {
+                Scale += 0.01f;
+            }
+            if (Keyboard.Down(Microsoft.Xna.Framework.Input.Keys.OemMinus))
+            {
+                Scale -= 0.01f;
+            }
+            return Matrix.CreateTranslation(new Vector3(-_position.X, -_position.Y, 0f)) * Matrix.CreateScale(Scale);
         }
 
         public float CenterX
@@ -39,13 +47,18 @@ namespace QR_game
 
         public float Width
         {
-            get => Graphics.Width;
+            get => Graphics.Width / Scale;
         }
 
         public float Height
         {
-            get => Graphics.Height;
+            get => Graphics.Height / Scale;
         }
+
+        public float Scale
+        {
+            get; set;
+        } = 1;
 
         public float X
         {

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace QR_game.Objects
 {
-    public class Player : PhysicsObject
+    public class Player : Entity
     {
         public Player(float x, float y) : base(x, y)
         {
             _sprite = new AnimatedSprite(Textures.Player, 0, 0, 32, 64, 1);
             _controller = new Controller();
-            Width = 32;
-            Height = 64;
-            StaticObject = false;
+            Width = 64;
+            Height = 128;
+            Team = Enemies.Team.Allies;
         }
 
         public override void Draw()
@@ -32,6 +32,11 @@ namespace QR_game.Objects
             else if (Keyboard.Pressed(Keys.A))
                 _sprite.Flip = true;
             base.Update();
+        }
+
+        protected override void OnDamage(int value)
+        {
+            base.OnDamage(value);
         }
 
         private Controller _controller;

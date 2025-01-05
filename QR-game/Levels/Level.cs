@@ -15,11 +15,20 @@ namespace QR_game.Levels
         {
             _camera = new Camera();
             _objects = new List<GameObj>();
+            _obj2 = new List<(GameObj, bool)>();
             this.Add(_player = new Player(200, 200));
         }
 
         public void Update()
         {
+            foreach(var obj in _obj2)
+            {
+                if (obj.Item2)
+                    _objects.Add(obj.Item1);
+                else
+                    _objects.Remove(obj.Item1);
+            }
+            _obj2.Clear();
             _camera.CenterX = _player.X;
             _camera.CenterY = _player.Y;
             _camera.Update();
@@ -46,17 +55,17 @@ namespace QR_game.Levels
 
         public void Add(GameObj obj)
         {
-            _objects.Add(obj);
+            _obj2.Add((obj, true));
         }
 
-        public void Remove()
+        public void Remove(GameObj obj)
         {
-            throw new NotImplementedException();
+            _obj2.Add((obj, false));
         }
 
         private Player _player;
         private Camera _camera;
         private List<GameObj> _objects;
-        // list add, list remove
+        private List<(GameObj, bool)> _obj2;
     }
 }
