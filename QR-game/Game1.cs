@@ -45,10 +45,10 @@ namespace QR_game
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            Graphics.spriteBatch.Begin();
             _level.Draw();
+            Graphics.spriteBatch.Begin();
             Dev.Draw();
+            // UI
             Graphics.spriteBatch.End();
             base.Draw(gameTime);
         }

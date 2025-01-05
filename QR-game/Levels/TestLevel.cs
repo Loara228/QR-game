@@ -17,7 +17,6 @@ namespace QR_game.Levels
                 Width = 32f,
                 Height = 32f
             });
-            this.Add(new Player(200, 200));
         }
     }
 }
