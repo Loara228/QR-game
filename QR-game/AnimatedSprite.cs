@@ -29,13 +29,24 @@ namespace QR_game
             int frames = 1)
         {
             _texture = texture;
-            var list = new List<Rectangle>();
+            var list = new List<Rectangle?>();
             for (int i = 0; i < frames; i++)
             {
                 list.Add(new Rectangle(sourceX, sourceY + (i * sourceHeight), sourceWidth, sourceHeight));
             }
             _sourceRectangles = list.ToArray();
         }
+
+        public AnimatedSprite(Texture2D texture, Rectangle?[] sourceRectangles)
+        {
+            _texture = texture;
+            _sourceRectangles = sourceRectangles;
+        }
+
+        public AnimatedSprite(Texture2D texture, Rectangle? rect = null) : this(texture, [rect])
+        {
+        }
+
         public void Draw(GameObj from)
         {
             Graphics.Draw(
@@ -50,6 +61,7 @@ namespace QR_game
         public Texture2D Texture
         {
             get => _texture;
+            set => _texture = value;
         }
 
         /// <summary>
@@ -70,7 +82,7 @@ namespace QR_game
         } = true;
 
         private int _frameIndex = 0;
-        private Rectangle[] _sourceRectangles;
+        private Rectangle?[] _sourceRectangles;
         private Texture2D _texture;
     }
 }

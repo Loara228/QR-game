@@ -40,11 +40,12 @@ namespace QR_game.Levels
 
         public void Draw()
         {
-            Graphics.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, _camera.GetMatrix());
+            Graphics.spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, _camera.GetMatrix());
             foreach (GameObj obj in _objects)
             {
                 obj.Draw();
             }
+            Dev.Draw();
             Graphics.spriteBatch.End();
         }
 
@@ -54,13 +55,44 @@ namespace QR_game.Levels
             {
                 if (ent.Team != _player.Team && ent.ID == id)
                 {
-                    ent.Hit(_player, _player.Damage);
+                    ent.Hit(_player);
                 }
             }
         }
 
+        public int GetNewId()
+        {
+            List<int> ids = new List<int>();
+
+            _objects.OfType<Entity>().ToList().ForEach(x => ids.Add(x.ID));
+            foreach (var obj in _obj2)
+            {
+                if (obj.Item2 && obj.Item1 is Entity)
+                {
+                    ids.Add((obj.Item1 as Entity).ID);
+                }
+            }
+            for (int i = 1; i < 100; i++)
+            {
+                if (!ids.Contains(i))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         public void Add(GameObj obj)
         {
+            if (obj is Entity)
+            {
+                var ent = (obj as Entity);
+                if (ent.Team != QR_game.Objects.Enemies.Team.Unknown &&
+                    ent.Team != QR_game.Objects.Enemies.Team.Allies)
+                {
+                    ent.ID = GetNewId();
+                }
+            }
             _obj2.Add((obj, true));
         }
 

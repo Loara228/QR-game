@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using QR_game.Objects.Enemies;
+using QR_game.Objects.Healthbars;
 using QR_game.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace QR_game.Objects
     {
         public Entity(float x, float y) : base(x, y)
         {
+            _healthbar = new HealthbarEntity(this);
+
             Width = 64;
             Height = 64;
             Collidable = true;
@@ -23,10 +26,17 @@ namespace QR_game.Objects
             _health = MaxHealth;
 
             Damage = 5;
-            ID = 1;
+
+            this._id = -1;
         }
 
-        public void Hit(Entity from, int value)
+        public override void Draw()
+        {
+            base.Draw();
+            _healthbar.Draw();
+        }
+
+        public void Hit(Entity from)
         {
             var vel = new Vector2(this.X - from.X, this.Y - from.Y);
             vel.Normalize();
@@ -74,7 +84,13 @@ namespace QR_game.Objects
 
         public int ID
         {
-            get; set;
+            get => _id;
+            set
+            {
+                _id = value;
+                if (Team != Team.Unknown && Team != Team.Allies)
+                    _sprite.Texture = Textures.QR[_id];
+            }
         }
 
         public int Health
@@ -97,6 +113,9 @@ namespace QR_game.Objects
             get; set;
         }
 
+        protected Healthbar _healthbar;
+
         private int _health;
+        private int _id;
     }
 }

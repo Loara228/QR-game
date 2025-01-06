@@ -14,6 +14,8 @@ namespace QR_game.Levels
         {
             this.Add(new Block(150, 130));
             this.Add(new EnemyQR(350, 200));
+            this.Add(new EnemyQR(450, 200));
+            this.Add(new EnemyQR(550, 200));
         }
     }
 }

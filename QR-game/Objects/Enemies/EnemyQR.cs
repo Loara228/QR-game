@@ -12,7 +12,7 @@ namespace QR_game.Objects.Enemies
     {
         public EnemyQR(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.QR, 0, 0, 40, 41, 1);
+            _sprite = new AnimatedSprite(null, [null]);
             Team = Team.Enemies;
         }
     }

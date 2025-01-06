@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QR-game", "QR-game\QR-game.csproj", "{1B8533E9-8520-4AEF-8D8C-C9821FD963B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qr", "qr\qr.csproj", "{2DCF17B8-F795-4719-9E96-E28A196F1A0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1B8533E9-8520-4AEF-8D8C-C9821FD963B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B8533E9-8520-4AEF-8D8C-C9821FD963B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B8533E9-8520-4AEF-8D8C-C9821FD963B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B8533E9-8520-4AEF-8D8C-C9821FD963B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DCF17B8-F795-4719-9E96-E28A196F1A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DCF17B8-F795-4719-9E96-E28A196F1A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DCF17B8-F795-4719-9E96-E28A196F1A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DCF17B8-F795-4719-9E96-E28A196F1A0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6AE81EBC-7D53-4F31-9CAB-A919B619434A}
+		SolutionGuid = {74122D62-9A90-46D3-B688-02ED8BF96701}
 	EndGlobalSection
 EndGlobal
