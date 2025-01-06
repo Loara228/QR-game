@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace QR_game
     {
         static Graphics()
         {
+        }
+
+        internal static void Load(ContentManager content)
+        {
+            //_font = content.Load<SpriteFont>("arial");
         }
 
         internal static void Initialize()
@@ -75,6 +81,12 @@ namespace QR_game
             }
         }
 
+        public static void DrawText(string text, Vector2 position, Color color)
+        {
+            throw new NotImplementedException();
+            //spriteBatch.DrawString(_font, text, position, color);
+        }
+
         public static void DrawRect(SharpDX.RectangleF rect, Color color, float width = 1f)
         {
             DrawRect(rect.ToXna(), color, width);
@@ -86,6 +98,23 @@ namespace QR_game
             DrawLine(new Vector2(rect.Right, rect.Top), new Vector2(rect.Right, rect.Bottom), color, width);
             DrawLine(new Vector2(rect.Right, rect.Bottom), new Vector2(rect.Left, rect.Bottom), color, width);
             DrawLine(new Vector2(rect.Left, rect.Bottom), new Vector2(rect.Left, rect.Top), color, width);
+        }
+
+        public static void DrawCircle(SharpDX.Vector2 center, float radius, Color color, int width = 1, int segments = 16)
+        {
+            float segmentAngle = MathHelper.TwoPi / segments;
+            Vector2 previousPoint = Vector2.Zero;
+
+            for (int i = 0; i <= segments; i++)
+            {
+                float angle = i * segmentAngle;
+                var currentPoint = new Vector2(
+                    center.X + radius * (float)Math.Cos(angle),
+                    center.Y + radius * (float)Math.Sin(angle));
+                if (i > 0)
+                    Graphics.DrawLine(previousPoint, currentPoint, color, width);
+                previousPoint = currentPoint;
+            }
         }
 
         public static void FillRectangle(Rectangle rect, Color color)
@@ -107,5 +136,6 @@ namespace QR_game
         internal static SpriteBatch spriteBatch;
 
         private static Texture2D _pixel;
+        private static SpriteFont _font;
     }
 }

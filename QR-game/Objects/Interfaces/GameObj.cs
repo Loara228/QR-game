@@ -20,16 +20,31 @@ namespace QR_game.Objects.Interfaces
 
         public GameObj() : this(0, 0)
         {
-
         }
 
         public virtual void Update()
         {
+
         }
 
         public virtual void Draw()
         {
             Sprite.Draw(this);
+        }
+
+        public Vector2 Center
+        {
+            get => _rect.Center;
+            set
+            {
+                this.Position = new Vector2(value.X - Width / 2, value.Y - Height / 2);
+            }
+        }
+
+        public Size2F Size
+        {
+            get => _rect.Size;
+            set => _rect.Size = value;
         }
 
         public RectangleF Rect

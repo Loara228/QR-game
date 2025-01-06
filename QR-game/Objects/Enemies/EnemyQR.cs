@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Interfaces;
+﻿using QR_game.Objects.Enemies.AI;
+using QR_game.Objects.Interfaces;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace QR_game.Objects.Enemies
         {
             _sprite = new AnimatedSprite(null, [null]);
             Team = Team.Enemies;
+            _ai = new AIDefault(this);
+            MaxSpeed = 20f;
+            Width = 64;
+            Height = 64;
         }
     }
 }

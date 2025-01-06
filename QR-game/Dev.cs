@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using static QR_game.Ext;
+using QR_game.Objects;
+using Microsoft.Xna.Framework.Input;
 
 namespace QR_game
 {
@@ -13,12 +15,19 @@ namespace QR_game
     {
         public static void Update()
         {
-
+            if (Keyboard.Pressed(Keys.Escape))
+                Game1.CurrentLevel = new TestLevel();
         }
         
         public static void Draw()
         {
-            foreach(var obj in Game1.CurrentLevel.Objects)
+            //DrawHitboxes();
+            //DrawAI();
+        }
+
+        public static void DrawHitboxes()
+        {
+            foreach (var obj in Game1.CurrentLevel.Objects)
             {
                 Graphics.DrawRect(obj.Rect.ToXna(), Color.Red, 2);
                 Graphics.DrawLine(
@@ -30,6 +39,15 @@ namespace QR_game
             }
         }
 
-        private static readonly bool DRAW_HITBOXES = true;
+        public static void DrawAI()
+        {
+            foreach(Entity ent in Game1.CurrentLevel.Objects.OfType<Entity>())
+            {
+                if (ent.HasAI)
+                {
+                    Graphics.DrawCircle(ent.Center, ent.AI.AttackRange, Color.Cyan);
+                }
+            }
+        }
     }
 }

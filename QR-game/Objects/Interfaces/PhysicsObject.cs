@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using SharpDX;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,7 +23,8 @@ namespace QR_game.Objects.Interfaces
         {
             Collidable = true;
             StaticObject = true;
-            Velocity = new Vector2();
+            Velocity = new SharpDX.Vector2();
+            MaxSpeed = 5.5f;
         }
 
         public override void Update()
@@ -122,22 +123,22 @@ namespace QR_game.Objects.Interfaces
         }
         private void UpdateLimits()
         {
-            if (HSpeed > max_speed)
+            if (HSpeed > MaxSpeed)
             {
-                HSpeed = max_speed;
+                HSpeed = MaxSpeed;
             }
-            else if (Velocity.X < -max_speed)
+            else if (Velocity.X < -MaxSpeed)
             {
-                HSpeed = -max_speed;
+                HSpeed = -MaxSpeed;
             }
 
-            if (Velocity.Y > max_speed)
+            if (Velocity.Y > MaxSpeed)
             {
-                _velocity.Y = max_speed;
+                _velocity.Y = MaxSpeed;
             }
-            else if (Velocity.Y < -max_speed)
+            else if (Velocity.Y < -MaxSpeed)
             {
-                _velocity.Y = -max_speed;
+                _velocity.Y = -MaxSpeed;
             }
         }
 
@@ -157,7 +158,7 @@ namespace QR_game.Objects.Interfaces
             get; set;
         }
 
-        public Vector2 Velocity
+        public SharpDX.Vector2 Velocity
         {
             get => _velocity;
             set => _velocity = value;
@@ -168,7 +169,7 @@ namespace QR_game.Objects.Interfaces
             get => Velocity.X;
             set
             {
-                Velocity = new Vector2(value, VSpeed);
+                Velocity = new SharpDX.Vector2(value, VSpeed);
             }
         }
 
@@ -177,13 +178,17 @@ namespace QR_game.Objects.Interfaces
             get => Velocity.Y;
             set
             {
-                Velocity = new Vector2(HSpeed, value);
+                Velocity = new SharpDX.Vector2(HSpeed, value);
             }
         }
 
-        public readonly float max_speed = 5.5f;
+        protected float MaxSpeed
+        {
+            get; set;
+        }
+
         private readonly float friction = 0.35f;
 
-        private Vector2 _velocity;
+        private SharpDX.Vector2 _velocity;
     }
 }

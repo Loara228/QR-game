@@ -12,10 +12,31 @@ namespace QR_game.Levels
     {
         public TestLevel()
         {
-            this.Add(new Block(150, 130));
-            this.Add(new EnemyQR(350, 200));
-            this.Add(new EnemyQR(450, 200));
+            AddBorder();
             this.Add(new EnemyQR(550, 200));
+            this.Add(new EnemyQR(-550, -200));
+            this.Add(new EnemyQR(550, -900));
+            this.Add(new EnemyQR(-550, 700));
+        }
+
+        private void AddBorder()
+        {
+            this.Add(new Block(-1000, -1000)
+            {
+                Width = 2000
+            });
+            this.Add(new Block(-1000, -1000)
+            {
+                Height = 2000
+            });
+            this.Add(new Block(-1000, 1000)
+            {
+                Width = 2000
+            });
+            this.Add(new Block(1000, -1000)
+            {
+                Height = 2000
+            });
         }
     }
 }

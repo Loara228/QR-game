@@ -42,15 +42,15 @@ namespace QR_game
             if (indexStart > 0)
             {
                 string qrCode = Input.Substring(indexStart, Input.Length - indexStart);
-                System.Diagnostics.Debug.WriteLine(qrCode);
                 if (Int32.TryParse(qrCode, out int qrId))
                 {
                     Game1.CurrentLevel.HitEnemyById(qrId);
                 }
+                //System.Diagnostics.Debug.WriteLine(qrCode);
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("code not found!");
+                //System.Diagnostics.Debug.WriteLine("code not found!");
             }
             Input = string.Empty;
         }

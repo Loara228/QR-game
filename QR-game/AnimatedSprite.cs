@@ -49,6 +49,8 @@ namespace QR_game
 
         public void Draw(GameObj from)
         {
+            if (_texture == null)
+                return;
             Graphics.Draw(
                 _texture,
                 from.Rect.ToXna(),

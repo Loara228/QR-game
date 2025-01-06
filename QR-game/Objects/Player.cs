@@ -17,7 +17,11 @@ namespace QR_game.Objects
             Width = 64;
             Height = 128;
             Team = Enemies.Team.Allies;
-            Damage = 52;
+
+            Stats.damage = 80;
+            Stats.magicResist = 25;
+            Stats.armor = 5;
+            Stats.pickupRadius = 150;
         }
 
         public override void Draw()
@@ -33,6 +37,22 @@ namespace QR_game.Objects
             else if (Keyboard.Pressed(Keys.A))
                 _sprite.Flip = true;
             base.Update();
+        }
+
+        protected override void Touch(TouchSide side, PhysicsObject from)
+        {
+            if (from is Entity)
+            {
+                var ent_from = from as Entity;
+                if (ent_from.Team != this.Team)
+                {
+                    if (ent_from.HasAI && ent_from.AI.AttackCooldown <= 0)
+                    {
+                        ent_from.AI.AttackCooldown = ent_from.AI.AttackCooldownTime;
+                        this.OnDamage(ent_from.Damage);
+                    }
+                }
+            }
         }
 
         protected override void OnDamage(int value)

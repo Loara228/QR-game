@@ -30,6 +30,7 @@ namespace QR_game
             Graphics.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             Textures.Load(this.Content);
+            Graphics.Load(this.Content);
 
             Game1._level = new TestLevel();
         }
@@ -55,6 +56,16 @@ namespace QR_game
         public static Level CurrentLevel
         {
             get => _level;
+            set
+            {
+                _level = value;
+                LevelChanged();
+            }
+        }
+
+        private static void LevelChanged()
+        {
+
         }
 
         private static Level _level;

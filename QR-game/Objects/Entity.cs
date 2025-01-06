@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using QR_game.Objects.Enemies;
+﻿using QR_game.Objects.Enemies;
+using QR_game.Objects.Enemies.AI;
 using QR_game.Objects.Healthbars;
 using QR_game.Objects.Interfaces;
+using SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +17,28 @@ namespace QR_game.Objects
         {
             _healthbar = new HealthbarEntity(this);
 
-            Width = 64;
-            Height = 64;
+            Width = 32;
+            Height = 32;
             Collidable = true;
             StaticObject = false;
             Team = Team.Unknown;
 
-            MaxHealth = 500;
-            _health = MaxHealth;
-
-            Damage = 5;
+            Stats = EntityStats.Default();
 
             this._id = -1;
+            this._ai = null!;
         }
 
         public override void Draw()
         {
             base.Draw();
             _healthbar.Draw();
+        }
+
+        public override void Update()
+        {
+            _ai?.Update();
+            base.Update();
         }
 
         public void Hit(Entity from)
@@ -46,26 +51,26 @@ namespace QR_game.Objects
 
         protected virtual void OnDamage(int value)
         {
-            if (_health - value > 0)
+            if (Health - value > 0)
             {
-                _health -= value;
+                Health -= value;
             }
             else
             {
-                _health = 0;
+                Health = 0;
                 OnKilled();
             }
         }
 
         protected virtual void OnHeal(int value)
         {
-            if (_health + value > MaxHealth)
+            if (Health + value > MaxHealth)
             {
-                _health = MaxHealth;
+                Health = MaxHealth;
             }
             else
             {
-                _health += value;
+                Health += value;
             }
         }
 
@@ -76,10 +81,6 @@ namespace QR_game.Objects
 
         protected override void Touch(TouchSide side, PhysicsObject from)
         {
-            if (from is Entity && (from as Entity).Team != this.Team)
-            {
-                this.OnDamage((from as Entity).Damage);
-            }
         }
 
         public int ID
@@ -93,19 +94,25 @@ namespace QR_game.Objects
             }
         }
 
+        public bool HasAI
+        {
+            get => _ai != null;
+        }
+
         public int Health
         {
-            get => _health;
+            get => Stats.health;
+            set => Stats.health = value;
         }
 
         public int MaxHealth
         {
-            get; set;
+            get => Stats.maxHealth;
         }
 
         public int Damage
         {
-            get; set;
+            get => Stats.damage;
         }
 
         public Team Team
@@ -113,9 +120,19 @@ namespace QR_game.Objects
             get; set;
         }
 
+        public AI AI
+        {
+            get => _ai;
+        }
+
+        public EntityStats Stats
+        {
+            get; set;
+        }
+
+        protected AI _ai;
         protected Healthbar _healthbar;
 
-        private int _health;
         private int _id;
     }
 }

@@ -36,5 +36,16 @@ namespace QR_game
             // if the distance is less than the radius, collision!
             return distance <= radius;
         }
+
+
+
+        public static bool CircleCircle(Vector2 c1, float radius1, Vector2 c2, float radius2)
+        {
+            float distX = c1.X - c2.X;
+            float distY = c1.Y - c2.Y;
+            float distance = MathF.Sqrt((distX * distX) + (distY * distY));
+
+            return distance <= radius1 + radius2;
+        }
     }
 }
