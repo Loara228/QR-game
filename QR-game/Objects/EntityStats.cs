@@ -22,7 +22,8 @@ namespace QR_game.Objects
                 armor = 0,
                 magicResist = 0,
                 experience = 0,
-                pickupRadius = 0
+                pickupRadius = 0,
+                moveSpeed = 5.5f
             };
 
         // on something changed? Calc all from list
@@ -40,6 +41,6 @@ namespace QR_game.Objects
 
         public int pickupRadius;
 
-        // ms?
+        public float moveSpeed;
     }
 }

@@ -7,15 +7,27 @@ using System.Threading.Tasks;
 
 namespace QR_game.Objects.Drop
 {
-    public class Drop : GameObj
+    public class Drop : PhysicsObject
     {
         public Drop(float x, float y) : base(x, y)
         {
+            this.Collidable = true;
+            this.StaticObject = true;
+            this._sprite = new AnimatedSprite(Textures.GetTexture("drop"), [null]);
+            this.IgnoreCollision = true;
+        }
 
+        protected override void Touch(TouchSide side, PhysicsObject from)
+        {
+            if (from is Player)
+            {
+                Game1.CurrentLevel.Remove(this);
+            }
         }
 
         public override void Update()
         {
+            base.Update();
             // if in range
             //  magnetize
             // if in min range

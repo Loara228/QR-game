@@ -13,21 +13,34 @@ namespace QR_game
         internal static void Load(ContentManager content)
         {
             QR = new Dictionary<int, Texture2D>();
+            _textures = new Dictionary<string, Texture2D>();
+
             for (int i = 1; i < 100; i++)
             {
-                QR.Add(i, content.Load<Texture2D>($"qr{i.ToString("00")}"));
+                QR.Add(i, content.Load<Texture2D>($"qr/qr{i.ToString("00")}"));
             }
 
-            Textures._test = content.Load<Texture2D>("test");
-            Textures._player = content.Load<Texture2D>("player");
+            _null = content.Load<Texture2D>("null");
+            LoadTexture("test", content);
+            LoadTexture("player", content);
         }
-            
-        public static Texture2D Test => _test;
-        private static Texture2D _test = null!;
 
-        public static Texture2D Player => _player;
-        private static Texture2D _player = null!;
+        private static void LoadTexture(string name, ContentManager content)
+        {
+            _textures.Add(name, content.Load<Texture2D>(name));
+        }
+
+        public static Texture2D GetTexture(string name)
+        {
+            if (_textures.TryGetValue(name, out Texture2D tex))
+            {
+                return tex;
+            }
+            return _null;
+        }
 
         public static Dictionary<int, Texture2D> QR;
+        private static Dictionary<string, Texture2D> _textures;
+        private static Texture2D _null = null;
     }
 }

@@ -29,7 +29,7 @@ namespace QR_game.Objects.Interfaces
 
         public virtual void Draw()
         {
-            Sprite.Draw(this);
+            Sprite?.Draw(this);
         }
 
         public Vector2 Center

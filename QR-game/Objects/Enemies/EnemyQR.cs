@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Enemies.AI;
+﻿using QR_game.Objects.Drop;
+using QR_game.Objects.Enemies.AI;
 using QR_game.Objects.Interfaces;
 using SharpDX.Direct3D9;
 using System;
@@ -19,6 +20,14 @@ namespace QR_game.Objects.Enemies
             MaxSpeed = 20f;
             Width = 64;
             Height = 64;
+
+            Stats.health = 50;
+        }
+
+        protected override void OnKilled()
+        {
+            Game1.CurrentLevel.Add(new Drop.Drop(this.X, this.Y));
+            base.OnKilled();
         }
     }
 }

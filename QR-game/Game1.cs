@@ -45,7 +45,7 @@ namespace QR_game
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Yellow);
+            GraphicsDevice.Clear(Color.AntiqueWhite);
             _level.Draw();
             //Graphics.spriteBatch.Begin();
             // UI

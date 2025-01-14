@@ -29,24 +29,27 @@ namespace QR_game.Objects.Interfaces
 
         public override void Update()
         {
-            if (MathF.Abs(HSpeed) < friction)
+            if (!StaticObject)
             {
-                HSpeed = 0;
-            }
-            else
-            {
-                HSpeed -= HSpeed > 0 ? friction : -friction;
-            }
-            if (MathF.Abs(VSpeed) < friction)
-            {
-                VSpeed = 0;
-            }
-            else
-            {
-                VSpeed -= VSpeed > 0 ? friction : -friction;
+                if (MathF.Abs(HSpeed) < friction)
+                {
+                    HSpeed = 0;
+                }
+                else
+                {
+                    HSpeed -= HSpeed > 0 ? friction : -friction;
+                }
+                if (MathF.Abs(VSpeed) < friction)
+                {
+                    VSpeed = 0;
+                }
+                else
+                {
+                    VSpeed -= VSpeed > 0 ? friction : -friction;
+                }
+                UpdateLimits();
             }
 
-            UpdateLimits();
 
             var oldPos = this.Position;
 
@@ -61,12 +64,12 @@ namespace QR_game.Objects.Interfaces
 
         }
 
-        public float Speed() => 
+        public float Speed() =>
             MathF.Sqrt(MathF.Pow(Math.Abs(this.Velocity.X), 2) + MathF.Pow(Math.Abs(this.Velocity.Y), 2));
 
         private void UpdateCollision(SharpDX.Vector2 oldPos)
         {
-            if (Collidable && !StaticObject)
+            if (this.Collidable && !this.StaticObject)
             {
                 Game1.CurrentLevel.Objects
                     .OfType<PhysicsObject>()
@@ -74,52 +77,57 @@ namespace QR_game.Objects.Interfaces
                     .ToList()
                     .ForEach(x =>
                     {
-                        if (Collision.ObjObj(this, x))
-                            this.Collide(x, oldPos);
+                        if (x.Collidable)
+                            if (Collision.ObjObj(this, x))
+                                this.Collide(x, oldPos);
                     });
             }
         }
 
-        private void Collide(PhysicsObject obj, SharpDX.Vector2 oldPos)
+        private void Collide(PhysicsObject with, SharpDX.Vector2 oldPos)
         {
-
             SharpDX.Vector2 nextPosition = this.Position;
             const float offset = 0.1001f;
 
             // top collision
-            if (this.Rect.Bottom >= obj.Position.Y && oldPos.Y + Height < obj.Position.Y)
+            if (this.Rect.Bottom >= with.Position.Y && oldPos.Y + Height < with.Position.Y)
             {
-                nextPosition.Y = obj.Position.Y - offset - this.Height;
-                VSpeed = 0;
-                this.Touch(TouchSide.Bottom, obj);
-                obj.Touch(TouchSide.Top, this);
+                nextPosition.Y = with.Position.Y - offset - this.Height;
+                if (!this.IgnoreCollision && !with.IgnoreCollision)
+                    VSpeed = 0;
+                this.Touch(TouchSide.Bottom, with);
+                with.Touch(TouchSide.Top, this);
             }
             // bottom collision
-            else if (this.Position.Y <= obj.Rect.Bottom && oldPos.Y > obj.Rect.Bottom)
+            else if (this.Position.Y <= with.Rect.Bottom && oldPos.Y > with.Rect.Bottom)
             {
-                nextPosition.Y = obj.Rect.Bottom + offset;
-                VSpeed = 0;
-                this.Touch(TouchSide.Top, obj);
-                obj.Touch(TouchSide.Bottom, this);
+                nextPosition.Y = with.Rect.Bottom + offset;
+                if (!this.IgnoreCollision && !with.IgnoreCollision)
+                    VSpeed = 0;
+                this.Touch(TouchSide.Top, with);
+                with.Touch(TouchSide.Bottom, this);
             }
             // right collision
-            else if (this.Rect.Right >= obj.Position.X && oldPos.X + Width < obj.Position.X)
+            else if (this.Rect.Right >= with.Position.X && oldPos.X + Width < with.Position.X)
             {
-                nextPosition.X = obj.Position.X - offset - Width;
-                HSpeed = 0;
-                this.Touch(TouchSide.Right, obj);
-                obj.Touch(TouchSide.Left, this);
+                nextPosition.X = with.Position.X - offset - Width;
+                if (!this.IgnoreCollision && !with.IgnoreCollision)
+                    HSpeed = 0;
+                this.Touch(TouchSide.Right, with);
+                with.Touch(TouchSide.Left, this);
             }
             // left collision
-            else if (this.Position.X <= obj.Rect.Right && oldPos.X > obj.Rect.Right)
+            else if (this.Position.X <= with.Rect.Right && oldPos.X > with.Rect.Right)
             {
-                nextPosition.X = obj.Rect.Right + offset;
-                HSpeed = 0;
-                this.Touch(TouchSide.Left, obj);
-                obj.Touch(TouchSide.Right, this);
+                nextPosition.X = with.Rect.Right + offset;
+                if (!this.IgnoreCollision && !with.IgnoreCollision)
+                    HSpeed = 0;
+                this.Touch(TouchSide.Left, with);
+                with.Touch(TouchSide.Right, this);
             }
 
-            this.Position = nextPosition;
+            if (!this.IgnoreCollision && !with.IgnoreCollision)
+                this.Position = nextPosition;
         }
         private void UpdateLimits()
         {
@@ -154,6 +162,15 @@ namespace QR_game.Objects.Interfaces
         /// Если false, то обрабатываем столкновения
         /// </summary>
         public bool StaticObject
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Для особых объектов, которые должны взаимодействовать с объектами, но не должны сталкиваться.
+        /// Или для временных действий (типо перекат сквозь врагов)
+        /// </summary>
+        public bool IgnoreCollision
         {
             get; set;
         }

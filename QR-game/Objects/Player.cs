@@ -12,7 +12,7 @@ namespace QR_game.Objects
     {
         public Player(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.Player, 0, 0, 32, 64, 1);
+            _sprite = new AnimatedSprite(Textures.GetTexture("player"), 0, 0, 32, 64, 1);
             _controller = new Controller();
             Width = 64;
             Height = 128;
@@ -22,6 +22,9 @@ namespace QR_game.Objects
             Stats.magicResist = 25;
             Stats.armor = 5;
             Stats.pickupRadius = 150;
+            Stats.moveSpeed = 6f;
+
+            this.MaxSpeed = Stats.moveSpeed;
         }
 
         public override void Draw()
