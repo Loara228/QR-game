@@ -16,7 +16,10 @@ namespace QR_game
         public static void Update()
         {
             if (Keyboard.Pressed(Keys.Escape))
+            {
+                Game1.Paused = false;
                 Game1.CurrentLevel = new TestLevel();
+            }
         }
         
         public static void Draw()

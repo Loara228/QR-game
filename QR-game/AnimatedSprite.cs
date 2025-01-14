@@ -28,7 +28,7 @@ namespace QR_game
             int sourceHeight = 32,
             int frames = 1)
         {
-            _texture = texture;
+            Texture = texture;
             var list = new List<Rectangle?>();
             for (int i = 0; i < frames; i++)
             {
@@ -39,7 +39,7 @@ namespace QR_game
 
         public AnimatedSprite(Texture2D texture, Rectangle?[] sourceRectangles)
         {
-            _texture = texture;
+            Texture = texture;
             _sourceRectangles = sourceRectangles;
         }
 
@@ -51,20 +51,30 @@ namespace QR_game
         {
             if (_texture == null)
                 return;
-            Graphics.Draw(
-                _texture,
-                from.Rect.ToXna(),
-                _sourceRectangles[_frameIndex],
-                Color.White,
-                0,
-                Flip);
+
+            Graphics.Draw(this, from.Rect.ToXna());
         }
 
         public Texture2D Texture
         {
             get => _texture;
-            set => _texture = value;
+            set
+            {
+                _texture = value;
+                if (value != null)
+                    Origin = new Vector2(value.Width / 2, value.Height / 2);
+            }
         }
+
+        public Rectangle? GetSourceRect()
+        {
+            return _sourceRectangles[_frameIndex];
+        }
+
+        public Vector2 Origin
+        {
+            get; set;
+        } = Vector2.Zero;
 
         /// <summary>
         /// Кадр по счету, а не индексу
@@ -83,6 +93,21 @@ namespace QR_game
             get; set;
         } = true;
 
+        /// <summary>
+        /// Radians
+        /// </summary>
+        public float Rotation
+        {
+            get; set;
+        } = 0f;
+
+        public float Depth
+        {
+            get => _depth;
+            set => _depth = value;
+        }
+
+        private float _depth = 1f;
         private int _frameIndex = 0;
         private Rectangle?[] _sourceRectangles;
         private Texture2D _texture;

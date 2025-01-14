@@ -21,7 +21,18 @@ namespace QR_game.Objects.Enemies
             Width = 64;
             Height = 64;
 
-            Stats.health = 50;
+            //Stats.health = 50;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            _sprite.Rotation += 0.1f;
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
         }
 
         protected override void OnKilled()

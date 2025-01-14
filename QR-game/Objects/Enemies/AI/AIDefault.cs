@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace QR_game.Objects.Enemies.AI
 {
+    /// <summary>
+    /// Всё просто. Если подошел, то атакуем. Что-то типо простого слизня
+    /// </summary>
     public class AIDefault : AI
     {
         public AIDefault(Entity owner) : base(owner)

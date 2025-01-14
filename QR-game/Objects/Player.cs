@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using QR_game.Objects.Interfaces;
+using QR_game.Objects.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace QR_game.Objects
         public override void Draw()
         {
             base.Draw();
+            Weapon?.Draw();
         }
 
         public override void Update()
@@ -40,6 +42,7 @@ namespace QR_game.Objects
             else if (Keyboard.Pressed(Keys.A))
                 _sprite.Flip = true;
             base.Update();
+            Weapon?.Update();
         }
 
         protected override void Touch(TouchSide side, PhysicsObject from)
@@ -58,9 +61,25 @@ namespace QR_game.Objects
             }
         }
 
+        public void Attack(Entity enemy)
+        {
+            Weapon?.TryAttack(enemy);
+        }
+
         protected override void OnDamage(int value)
         {
             base.OnDamage(value);
+        }
+
+        protected override void OnKilled()
+        {
+            base.OnKilled();
+            Game1.Paused = true;
+        }
+
+        public Weapon Weapon
+        {
+            get; set;
         }
 
         private Controller _controller;

@@ -26,33 +26,22 @@ namespace QR_game
             _pixel.SetData<Color>(new Color[] { Color.White });
         }
 
-        public static void Draw(Texture2D texture, Rectangle rect, Rectangle? sourceRect, Color color, float rotationRad = 0, bool flip = false)
+        public static void Draw(AnimatedSprite sprite, Rectangle displayRect)
         {
-            //White = new Color(uint.MaxValue);
-            if (rotationRad == 0)
-            {
-                Graphics.spriteBatch.Draw(
-                    texture,
-                    rect,
-                    sourceRect,
-                    color,
-                    MathHelper.ToRadians(rotationRad),
-                    Vector2.Zero,
-                    flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
-                    1f);
-                return;
-            }
-            rect.X += rect.Width / 2;
-            rect.Y += rect.Height / 2;
+            Graphics.Draw(sprite, displayRect, Color.White);
+        }
+
+        public static void Draw(AnimatedSprite sprite, Rectangle displayRect, Color color)
+        {
             Graphics.spriteBatch.Draw(
-                texture,
-                rect,
-                sourceRect,
+                sprite.Texture,
+                new Rectangle(displayRect.X + displayRect.Width / 2, displayRect.Y + displayRect.Height / 2, displayRect.Width, displayRect.Height),
+                sprite.GetSourceRect(),
                 color,
-                MathHelper.ToRadians(rotationRad),
-                new Vector2(rect.Width / 2, rect.Height / 2),
-                flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
-                1f);
+                sprite.Rotation,
+                sprite.Origin,
+                sprite.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                sprite.Depth);
         }
 
         public static void DrawLine(Vector2 start, Vector2 end, Color color, float width = 1f)

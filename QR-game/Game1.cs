@@ -38,7 +38,10 @@ namespace QR_game
         protected override void Update(GameTime gameTime)
         {
             Keyboard.Update();
-            _level.Update();
+            if (!Paused)
+            {
+                _level.Update();
+            }
             Dev.Update();
             base.Update(gameTime);
         }
@@ -66,6 +69,11 @@ namespace QR_game
         private static void LevelChanged()
         {
 
+        }
+
+        public static bool Paused
+        {
+            get; set;
         }
 
         private static Level _level;

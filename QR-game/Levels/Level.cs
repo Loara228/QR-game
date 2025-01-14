@@ -60,6 +60,17 @@ namespace QR_game.Levels
             }
         }
 
+        public void AttackEnemyById(int id)
+        {
+            foreach (Entity ent in _objects.OfType<Entity>())
+            {
+                if (ent.Team != _player.Team && ent.ID == id)
+                {
+                    Player.Attack(ent);
+                }
+            }
+        }
+
         public int GetNewId()
         {
             List<int> ids = new List<int>();
