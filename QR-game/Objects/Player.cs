@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using QR_game.Objects.Interfaces;
 using QR_game.Objects.Weapons;
+using QR_game.Objects.Weapons.RangedWeapon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace QR_game.Objects
         {
             _sprite = new AnimatedSprite(Textures.GetTexture("player"), 0, 0, 32, 64, 1);
             _controller = new Controller();
+            Weapon = new Pistol(this);
             Width = 64;
             Height = 128;
             Team = Enemies.Team.Allies;
@@ -22,7 +24,6 @@ namespace QR_game.Objects
             Stats.damage = 80;
             Stats.magicResist = 25;
             Stats.armor = 5;
-            Stats.pickupRadius = 150;
             Stats.moveSpeed = 6f;
 
             this.MaxSpeed = Stats.moveSpeed;

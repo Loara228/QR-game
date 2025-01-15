@@ -44,7 +44,7 @@ namespace QR_game
                 string qrCode = Input.Substring(indexStart, Input.Length - indexStart);
                 if (Int32.TryParse(qrCode, out int qrId))
                 {
-                    Game1.CurrentLevel.HitEnemyById(qrId);
+                    //Game1.CurrentLevel.HitEnemyById(qrId);
                     Game1.CurrentLevel.AttackEnemyById(qrId);
                 }
                 //System.Diagnostics.Debug.WriteLine(qrCode);

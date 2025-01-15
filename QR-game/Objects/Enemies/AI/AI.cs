@@ -34,6 +34,11 @@ namespace QR_game.Objects.Enemies.AI
                 Chasing();
         }
 
+        public virtual void OnDamaged()
+        {
+
+        }
+
         protected abstract void Idle();
         protected abstract void Finding();
         protected abstract void Attacking();

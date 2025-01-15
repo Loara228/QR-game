@@ -43,9 +43,9 @@ namespace QR_game.Objects
 
         public void Hit(Entity from)
         {
-            var vel = new Vector2(this.X - from.X, this.Y - from.Y);
-            vel.Normalize();
-            this.Velocity = vel * 10f;
+            //var vel = new Vector2(this.X - from.X, this.Y - from.Y);
+            //vel.Normalize();
+            //this.Velocity = vel * 10f;
             OnDamage(from.Damage);
         }
 
@@ -54,6 +54,7 @@ namespace QR_game.Objects
             if (Health - value > 0)
             {
                 Health -= value;
+                _ai?.OnDamaged();
             }
             else
             {

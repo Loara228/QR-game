@@ -9,17 +9,31 @@ namespace QR_game.Objects.Weapons
 {
     public abstract class Weapon : GameObj
     {
-        public AttackHandler AttackHandler
+        public Weapon(Player owner)
         {
-            get; set;
+            this._owner = owner;
+        }
+
+        public override void Update()
+        {
+            this.Center = _owner.Center;
+            base.Update();
+        }
+
+        public virtual bool CanAttack()
+        {
+            return Ammo > 0;
+        }
+
+        public virtual void Attack(Entity target)
+        {
+
         }
 
         public void TryAttack(Entity target)
         {
-            if (AttackHandler.CanAttack())
-            {
-                AttackHandler.Attack(target);
-            }
+            if (CanAttack())
+                Attack(target);
         }
 
         public int Ammo
@@ -32,9 +46,6 @@ namespace QR_game.Objects.Weapons
             get; set;
         }
 
-        public int Damage
-        {
-            get; set;
-        }
+        protected Player _owner;
     }
 }

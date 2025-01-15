@@ -39,6 +39,14 @@ namespace QR_game.Objects.Enemies.AI
             AttackChargeTimer -= 0.01f;
         }
 
+        public override void OnDamaged()
+        {
+            base.OnDamaged();
+            CurrentState = AIState.Idle;
+            _idleTimer = _idleTimerMax;
+            AttackCooldown = 0f;
+        }
+
         protected override void Finding()
         {
         }
