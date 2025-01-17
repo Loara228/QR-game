@@ -50,11 +50,32 @@ namespace QR_game.Objects.Weapons.Bullets
                 Game1.CurrentLevel.Remove(this);
             }
 
-            foreach (var ent in Collision.Trace<Entity>(_curTrace1, _curTrace2))
+            foreach (var intersection in Collision.TraceOrd<PhysicsObject>(_curTrace1, _curTrace2))
             {
-                if (ent.Team != _owner.Team)
-                    ent.Hit(_owner);
+                if (intersection.obj is Entity)
+                {
+                    var ent = intersection.obj as Entity;
+                    if (ent.Team != _owner.Team)
+                    {
+                        ent.Hit(_owner);
+                        //OnImpacted(intersection.point, intersection.obj);
+                    }
+                    break;
+                }
+                else if (intersection.obj is Block)
+                {
+                    OnImpacted(intersection.point, intersection.obj);
+                    break;
+                }
             }
+        }
+
+        protected virtual void OnImpacted(Vector2 position, GameObj obj)
+        {
+            // Add smoke
+            _curTrace2 = position;
+            Center = position;
+            Game1.CurrentLevel.Remove(this);
         }
 
         public override void Draw()
