@@ -35,6 +35,7 @@ namespace QR_game.Objects.Weapons.RangedWeapon
 
         public override void Attack(Entity target)
         {
+            new Bullet(this.Center, target.Center, Game1.CurrentLevel.Player);
             base.Attack(target);
         }
     }

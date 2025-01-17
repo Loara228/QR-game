@@ -20,6 +20,10 @@ namespace QR_game
                 Game1.Paused = false;
                 Game1.CurrentLevel = new TestLevel();
             }
+            if (Keyboard.Pressed(Keys.F10))
+            {
+                Graphics.FullScreen = !Graphics.FullScreen;
+            }
         }
         
         public static void Draw()

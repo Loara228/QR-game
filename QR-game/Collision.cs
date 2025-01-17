@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace QR_game
 {
+    /// <summary>
+    /// https://github.com/jeffThompson/CollisionDetection
+    /// </summary>
     internal static class Collision
     {
 
@@ -18,7 +21,7 @@ namespace QR_game
 
         public static IEnumerable<T> Trace<T>(Vector2 start, Vector2 end) where T : GameObj
         {
-            var result = new List<T();
+            var result = new List<T>();
             foreach (var obj in GetObjects<T>())
             {
                 if (LineObj(start, end, obj))

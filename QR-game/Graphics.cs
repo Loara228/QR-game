@@ -44,6 +44,11 @@ namespace QR_game
                 sprite.Depth);
         }
 
+        public static void DrawLine(SharpDX.Vector2 start, SharpDX.Vector2 end, Color color, float width = 1f)
+        {
+            Graphics.DrawLine(new Vector2(start.X, start.Y), new Vector2(end.X, end.Y), color, width);
+        }
+
         public static void DrawLine(Vector2 start, Vector2 end, Color color, float width = 1f)
         {
             Graphics.spriteBatch.Draw(
@@ -119,6 +124,26 @@ namespace QR_game
         public static float Height
         {
             get => deviceManager.GraphicsDevice.Viewport.Height;
+        }
+
+        public static bool FullScreen
+        {
+            get => Graphics.deviceManager.IsFullScreen;
+            set
+            {
+                Graphics.deviceManager.IsFullScreen = !Graphics.deviceManager.IsFullScreen;
+                if (FullScreen)
+                {
+                    Graphics.deviceManager.PreferredBackBufferWidth = 1920;
+                    Graphics.deviceManager.PreferredBackBufferHeight = 1080;
+                }
+                else
+                {
+                    Graphics.deviceManager.PreferredBackBufferWidth = 1280;
+                    Graphics.deviceManager.PreferredBackBufferHeight = 720;
+                }
+                Graphics.deviceManager.ApplyChanges();
+            }
         }
 
         internal static GraphicsDeviceManager deviceManager;

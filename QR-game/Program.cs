@@ -9,7 +9,7 @@ game.Window.TextInput += (s, e) =>
 game.Window.KeyDown += (s, e) =>
 {
     if (e.Key == Microsoft.Xna.Framework.Input.Keys.Enter)
-        Keyboard.EnterPressed();
+            Keyboard.EnterPressed();
 };
 
 game.Run();

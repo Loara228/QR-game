@@ -8,39 +8,86 @@ using System.Threading.Tasks;
 
 namespace QR_game.Objects.Weapons.Bullets
 {
-    public abstract class Bullet : PhysicsObject
+    public class Bullet : PhysicsObject
     {
-        public Bullet(Vector2 start, Vector2 end) : base(start.X, start.Y)
+        public Bullet(Vector2 start, Vector2 end, Entity from, bool fire = true) : base(start.X, start.Y)
         {
-            this._end = end;
-            this._start = start;
+            // Свойства пули
+            this.Spread = 0.15f;
+            this.Range = 1000;
+
+            // Внешний вид
             this.Width = 10;
             this.Height = 4;
-            this.Range = 500f;
-            this.Spread = 1f;
+            this._sprite = new AnimatedSprite(Textures.GetTexture("bullet"), [null]);
 
-            this.StaticObject = false;
-            this.Collidable = true;
+            // Путь
+            this._start = start;
+            this._end = end;
+            CalcDirection();
+            this._end = _start + _dir * Range;
+
+            this.StaticObject = true;
+            this.Collidable = false;
+            this.MaxSpeed = 9999f;
+
+            this._owner = from;
+
+            if (fire)
+                Fire();
         }
 
         public override void Update()
         {
-            const float speed = 10f;
+            const float speed = 60f;
             this.Velocity = _dir * speed;
-            // tracer
+            _curTrace1 = this.Center;
             base.Update();
+            _curTrace2 = this.Center;
+
+            if (Vector2.Distance(_start, _curTrace2) > this.Range)
+            {
+                Game1.CurrentLevel.Remove(this);
+            }
+
+            foreach (var ent in Collision.Trace<Entity>(_curTrace1, _curTrace2))
+            {
+                if (ent.Team != _owner.Team)
+                    ent.Hit(_owner);
+            }
         }
 
-        protected void Fire()
+        public override void Draw()
         {
-            this._sprite = new AnimatedSprite(Textures.GetTexture("bullet"), [null]);
+            Graphics.DrawLine(_curTrace1, _curTrace2, new Microsoft.Xna.Framework.Color(0, 0, 0, 100), 2);
+            base.Draw();
+        }
+
+        public virtual void Fire()
+        {
+            ApplySpread();
             this._sprite.Rotation = (float)Math.Atan2((double)(_end.Y - _start.Y), (double)(_end.X - _start.X));
-            this._dir = CalcDirection();
+            Game1.CurrentLevel.Add(this);
         }
 
-        protected Vector2 CalcDirection()
+        protected virtual void ApplySpread()
         {
-            return Vector2.Normalize(_end - _start);
+            _curSpread = CalcSpread();
+            float ang = MathF.Atan2(_dir.Y, _dir.X) + _curSpread;
+            this._dir = new Vector2(MathF.Cos(ang), MathF.Sin(ang));
+            this._end = _start + _dir * Range;
+
+            CalcDirection();
+        }
+
+        protected virtual float CalcSpread()
+        {
+            return Random.Shared.NextFloat(-(Spread / 2f), Spread / 2f);
+        }
+
+        private void CalcDirection()
+        {
+            _dir = Vector2.Normalize(_end - _start);
         }
 
         protected float Range
@@ -53,8 +100,13 @@ namespace QR_game.Objects.Weapons.Bullets
             get; set;
         }
 
+        protected Vector2 _start;
+        protected Vector2 _end;
+
+        private float _curSpread;
         private Vector2 _dir;
-        private Vector2 _start;
-        private Vector2 _end;
+        private Vector2 _curTrace1, _curTrace2;
+
+        private Entity _owner;
     }
 }
