@@ -1,12 +1,6 @@
-﻿using QR_game.Levels;
-using QR_game.Objects.Drop;
+﻿using QR_game.Objects.Entities;
 using QR_game.Objects.Weapons.Bullets;
 using SharpDX;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QR_game.Objects.Weapons.RangedWeapon
 {

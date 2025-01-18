@@ -1,15 +1,6 @@
 ﻿using QR_game.Drawing;
-using QR_game.Objects.Drop;
-using QR_game.Objects.Enemies.AI;
-using QR_game.Objects.Interfaces;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QR_game.Objects.Enemies
+namespace QR_game.Objects.Entities.Enemies.AI
 {
     public class EnemyQR : Entity
     {

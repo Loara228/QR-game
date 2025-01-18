@@ -1,14 +1,9 @@
-﻿using QR_game.Levels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using static QR_game.Ext;
-using QR_game.Objects;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using QR_game.Drawing;
+using QR_game.Levels;
+using QR_game.Objects.Entities;
+using System.Linq;
 
 namespace QR_game
 {

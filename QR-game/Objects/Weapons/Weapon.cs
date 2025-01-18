@@ -1,11 +1,7 @@
-﻿using QR_game.Objects.Interfaces;
+﻿using QR_game.Objects.Entities;
+using QR_game.Objects.Interfaces;
 using SharpDX;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace QR_game.Objects.Weapons

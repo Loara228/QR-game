@@ -1,12 +1,8 @@
-﻿using System;
-using SharpDX;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using QR_game.Objects.Interfaces;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QR_game.Objects.Interfaces
+namespace QR_game.Objects
 {
     public class PhysicsObject : GameObj
     {

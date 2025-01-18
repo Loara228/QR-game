@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using QR_game.Drawing;
-using QR_game.Objects;
+using QR_game.Objects.Entities;
 using QR_game.Objects.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QR_game.Levels
 {
@@ -99,8 +96,8 @@ namespace QR_game.Levels
             if (obj is Entity)
             {
                 var ent = (obj as Entity);
-                if (ent.Team != QR_game.Objects.Enemies.Team.Unknown &&
-                    ent.Team != QR_game.Objects.Enemies.Team.Allies)
+                if (ent.Team != Team.Unknown &&
+                    ent.Team != Team.Allies)
                 {
                     ent.ID = GetNewId();
                 }

@@ -1,15 +1,9 @@
-﻿using Microsoft.Xna.Framework.Input;
-using QR_game.Drawing;
-using QR_game.Objects.Interfaces;
+﻿using QR_game.Drawing;
 using QR_game.Objects.Weapons;
 using QR_game.Objects.Weapons.RangedWeapon;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QR_game.Objects
+namespace QR_game.Objects.Entities
 {
     public class Player : Entity
     {
@@ -30,7 +24,7 @@ namespace QR_game.Objects
             Weapon = new Pistol(this);
             Width = 64;
             Height = 96;
-            Team = Enemies.Team.Allies;
+            Team = Team.Allies;
 
             Stats.damage = 80;
             Stats.magicResist = 25;

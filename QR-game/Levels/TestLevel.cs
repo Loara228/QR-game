@@ -1,10 +1,5 @@
-﻿using QR_game.Objects;
-using QR_game.Objects.Enemies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QR_game.Objects.Blocks;
+using QR_game.Objects.Entities.Enemies.AI;
 
 namespace QR_game.Levels
 {
