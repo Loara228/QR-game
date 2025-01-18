@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using QR_game.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Linq;

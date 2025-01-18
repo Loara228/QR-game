@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using QR_game.Drawing;
 using SharpDX;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace QR_game.Objects.Interfaces
 
         public virtual void Update()
         {
-
+            Sprite?.Update();
         }
 
         public virtual void Draw()

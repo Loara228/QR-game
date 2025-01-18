@@ -13,7 +13,7 @@ namespace QR_game.Levels
         public TestLevel()
         {
             AddBorder();
-            this.Add(new EnemyQR(550, 200));
+            //this.Add(new EnemyQR(550, 200));
             this.Add(new Block(500, 100) { Height = 150 });
             // стенка врагов
             //this.Add(new EnemyQR(550, 200));

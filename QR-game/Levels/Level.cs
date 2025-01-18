@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using QR_game.Drawing;
 using QR_game.Objects;
 using QR_game.Objects.Interfaces;
 using System;

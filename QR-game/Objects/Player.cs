@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
+using QR_game.Drawing;
 using QR_game.Objects.Interfaces;
 using QR_game.Objects.Weapons;
 using QR_game.Objects.Weapons.RangedWeapon;
@@ -14,11 +15,21 @@ namespace QR_game.Objects
     {
         public Player(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.GetTexture("player"), 0, 0, 32, 64, 1);
+            _sprite = new AnimatedSprite(
+                Textures.GetTexture("characher"), 
+                16, 
+                24,
+                new Dictionary<string, List<int>>()
+                {
+                    { "idle", new List<int>() { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 3, 0, 1, 1 } },
+                    { "run", new List<int>() { 4, 5, 6, 7, 7 } },
+                });
+            _sprite.TimerDuration = 0.2f;
+            _sprite.SetAnimation("idle");
             _controller = new Controller();
             Weapon = new Pistol(this);
             Width = 64;
-            Height = 128;
+            Height = 96;
             Team = Enemies.Team.Allies;
 
             Stats.damage = 80;
@@ -38,10 +49,11 @@ namespace QR_game.Objects
         public override void Update()
         {
             _controller.Update(this);
+            _sprite.SetAnimation((_controller.AnyKey ? "run" : "idle"));
             if (Keyboard.Pressed(Keys.D))
-                _sprite.Flip = false;
+                _sprite.Flip = _controller.Flip;
             else if (Keyboard.Pressed(Keys.A))
-                _sprite.Flip = true;
+                _sprite.Flip = _controller.Flip;
             base.Update();
             Weapon?.Update();
         }

@@ -29,6 +29,7 @@ namespace QR_game.Objects.Interfaces
 
         public override void Update()
         {
+            base.Update();
             if (!StaticObject)
             {
                 if (MathF.Abs(HSpeed) < friction)

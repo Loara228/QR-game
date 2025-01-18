@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Interfaces;
+﻿using QR_game.Drawing;
+using QR_game.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

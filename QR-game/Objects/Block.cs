@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Interfaces;
+﻿using QR_game.Drawing;
+using QR_game.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace QR_game.Objects
     {
         public Block(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.GetTexture("test"), 0, 0, 32, 32, 1);
+            _sprite = new AnimatedSprite(Textures.GetTexture("test"), [null]);
             Width = 32;
             Height = 32;
             Collidable = true;

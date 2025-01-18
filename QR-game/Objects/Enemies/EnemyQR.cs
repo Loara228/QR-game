@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Drop;
+﻿using QR_game.Drawing;
+using QR_game.Objects.Drop;
 using QR_game.Objects.Enemies.AI;
 using QR_game.Objects.Interfaces;
 using SharpDX.Direct3D9;
@@ -14,7 +15,7 @@ namespace QR_game.Objects.Enemies
     {
         public EnemyQR(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(null, [null]);
+            _sprite = new AnimatedSprite(null, [null], 21, 21);
             Team = Team.Enemies;
             _ai = new AIDefault(this);
             MaxSpeed = 20f;

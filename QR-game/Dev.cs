@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using static QR_game.Ext;
 using QR_game.Objects;
 using Microsoft.Xna.Framework.Input;
+using QR_game.Drawing;
 
 namespace QR_game
 {
