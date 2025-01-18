@@ -20,6 +20,7 @@ namespace QR_game.Objects.Weapons.RangedWeapon
             this.Width = 32;
             this.Height = 16;
             this.Offset = new Vector2(6, 8);
+            this.BarrelOffset = new Vector2(16, 2);
 
             _sprite = new Drawing.AnimatedSprite(Textures.GetTexture("weapons/pistol"), [null]);
             _sprite.Origin = new Microsoft.Xna.Framework.Vector2(3, 4);
@@ -42,7 +43,7 @@ namespace QR_game.Objects.Weapons.RangedWeapon
 
         public override void Attack(Entity target)
         {
-            new Bullet(this.Center, target.Center, Game1.CurrentLevel.Player);
+            new Bullet(BarrelPosition, target.Center, Game1.CurrentLevel.Player);
             base.Attack(target);
         }
     }

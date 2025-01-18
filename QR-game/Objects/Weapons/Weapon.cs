@@ -2,6 +2,7 @@
 using SharpDX;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,6 @@ namespace QR_game.Objects.Weapons
             this._owner = owner;
             this.Width = 35;
             this.Height = 10;
-
-            Offset = new Vector2(6, 8);
         }
 
         public override void Update()
@@ -29,6 +28,7 @@ namespace QR_game.Objects.Weapons
         public override void Draw()
         {
             base.Draw();
+            QR_game.Drawing.Graphics.DrawCircle(Center + new Vector2(2, 8), 4, Microsoft.Xna.Framework.Color.Red, 3, 4);
         }
 
         public virtual bool CanAttack()
@@ -87,7 +87,23 @@ namespace QR_game.Objects.Weapons
             get; set;
         }
 
+        public Vector2 BarrelPosition
+        {
+            get => throw new NotImplementedException("todo");
+        }
+
+        /// <summary>
+        /// Смещение от центра персонажа для отображения оружия
+        /// </summary>
         protected Vector2 Offset
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Смещение от нулевой координаты текстуры. Указывает дуло оружия
+        /// </summary>
+        protected Vector2 BarrelOffset
         {
             get; set;
         }
