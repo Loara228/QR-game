@@ -13,18 +13,22 @@ namespace QR_game.Levels
         public TestLevel()
         {
             AddBorder();
-            //this.Add(new EnemyQR(550, 200));
-            this.Add(new Block(500, 100) { Height = 150 });
+            // враг в коробке
+            this.Add(new EnemyQR(550, 200));
+            this.Add(new Block(500, 0) { Height = 50, Width = 250 });
+            this.Add(new Block(500, 0) { Height = 250 });
+            this.Add(new Block(500, 250) { Height = 50, Width = 250 });
+            this.Add(new Block(650, 0) { Height = 250 });
             // стенка врагов
             //this.Add(new EnemyQR(550, 200));
             //this.Add(new EnemyQR(600, 200));
             //this.Add(new EnemyQR(650, 200));
             //this.Add(new EnemyQR(700, 200));
             // со всех сторон
-            //this.Add(new EnemyQR(550, 200));
-            //this.Add(new EnemyQR(-550, -200));
-            //this.Add(new EnemyQR(550, -900));
-            //this.Add(new EnemyQR(-550, 700));
+            this.Add(new EnemyQR(550, 200));
+            this.Add(new EnemyQR(-550, -200));
+            this.Add(new EnemyQR(550, -900));
+            this.Add(new EnemyQR(-550, 700));
         }
 
         private void AddBorder()

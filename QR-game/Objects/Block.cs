@@ -12,7 +12,7 @@ namespace QR_game.Objects
     {
         public Block(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.GetTexture("test"), [null]);
+            _sprite = new AnimatedSprite(Textures.GetTexture("null"), [null]);
             Width = 32;
             Height = 32;
             Collidable = true;

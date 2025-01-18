@@ -87,8 +87,12 @@ namespace QR_game.Drawing
 
         public Vector2 Origin
         {
-            get; set;
-        } = Vector2.Zero;
+            get
+            {
+                return _origin;
+            }
+            set => _origin = value;
+        }
 
         /// <summary>
         /// Кадр по счету, а не индексу
@@ -102,10 +106,15 @@ namespace QR_game.Drawing
             }
         }
 
+        public Vector2 FrameSize
+        {
+            get => new Vector2(_frameWidth, _frameHeight);
+        }
+
         public bool Flip
         {
             get; set;
-        } = true;
+        } = false;
 
         /// <summary>
         /// Radians
@@ -124,6 +133,7 @@ namespace QR_game.Drawing
         protected readonly int _frameWidth = 0;
         protected readonly int _frameHeight = 0;
 
+        private Vector2 _origin;
         private float _depth = 1f;
         protected int _frameIndex = 0;
         protected Rectangle?[] _sourceRectangles;

@@ -50,10 +50,8 @@ namespace QR_game.Objects
         {
             _controller.Update(this);
             _sprite.SetAnimation((_controller.AnyKey ? "run" : "idle"));
-            if (Keyboard.Pressed(Keys.D))
-                _sprite.Flip = _controller.Flip;
-            else if (Keyboard.Pressed(Keys.A))
-                _sprite.Flip = _controller.Flip;
+            _sprite.Flip = _controller.Flip;
+            Weapon.Sprite.Flip = _sprite.Flip;
             base.Update();
             Weapon?.Update();
         }

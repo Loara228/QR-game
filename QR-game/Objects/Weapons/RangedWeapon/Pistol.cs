@@ -16,6 +16,13 @@ namespace QR_game.Objects.Weapons.RangedWeapon
         {
             Ammo = 16;
             MaxAmmo = 16;
+
+            this.Width = 32;
+            this.Height = 16;
+            this.Offset = new Vector2(6, 8);
+
+            _sprite = new Drawing.AnimatedSprite(Textures.GetTexture("weapons/pistol"), [null]);
+            _sprite.Origin = new Microsoft.Xna.Framework.Vector2(3, 4);
         }
 
         public override void Update()

@@ -24,6 +24,7 @@ namespace QR_game.Drawing
 
         public override void Update()
         {
+            base.Update();
             if (_currentAnimationName == "")
                 return;
             if (Timer < 0)

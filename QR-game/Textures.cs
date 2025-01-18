@@ -23,6 +23,7 @@ namespace QR_game
             _null = content.Load<Texture2D>("null");
             LoadTexture("test", content);
             LoadTexture("characher", content);
+            LoadTexture("weapons/pistol", content);
         }
 
         private static void LoadTexture(string name, ContentManager content)

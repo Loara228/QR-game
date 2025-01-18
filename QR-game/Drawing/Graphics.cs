@@ -39,7 +39,7 @@ namespace QR_game.Drawing
                 sprite.GetSourceRect(),
                 color,
                 sprite.Rotation,
-                sprite.Origin,
+                sprite.Flip ? sprite.FrameSize - sprite.Origin : sprite.Origin,
                 sprite.Flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
                 sprite.Depth);
         }
