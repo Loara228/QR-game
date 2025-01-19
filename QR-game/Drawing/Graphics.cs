@@ -13,7 +13,7 @@ namespace QR_game.Drawing
 
         internal static void Load(ContentManager content)
         {
-            //_font = content.Load<SpriteFont>("arial");
+            _font = content.Load<SpriteFont>("fonts/default");
         }
 
         internal static void Initialize()
@@ -73,8 +73,7 @@ namespace QR_game.Drawing
 
         public static void DrawText(string text, Vector2 position, Color color)
         {
-            throw new NotImplementedException();
-            //spriteBatch.DrawString(_font, text, position, color);
+            spriteBatch.DrawString(Graphics._font, text, position, color);
         }
 
         public static void DrawRect(SharpDX.RectangleF rect, Color color, float width = 1f)

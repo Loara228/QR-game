@@ -1,6 +1,7 @@
 ﻿using QR_game.Objects.Entities;
 using SharpDX;
 using System;
+using System.Diagnostics;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace QR_game.Objects.Weapons.RangedWeapons
@@ -80,7 +81,7 @@ namespace QR_game.Objects.Weapons.RangedWeapons
         {
             get
             {
-                Vector2 offset = Vector2.Zero;
+                Vector2 offset;
                 if (_sprite.Flip)
                 {
                     offset = new Vector2(-BarrelOffset.X, BarrelOffset.Y);
@@ -89,8 +90,9 @@ namespace QR_game.Objects.Weapons.RangedWeapons
                 {
                     offset = BarrelOffset;
                 }
+                offset = new Vector2((offset.X / _sprite.FrameSize.X * Width) / 1.2f, offset.Y / _sprite.FrameSize.Y * Height);
                 var position = new Vector2(Center.X, Rect.Top);
-                return position + Rotate(offset, _sprite.Rotation);
+                return position + Rotate(offset, _sprite.Rotation, new Vector2(_sprite.Origin.X, _sprite.Origin.Y));
             }
         }
 

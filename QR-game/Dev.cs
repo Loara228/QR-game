@@ -26,6 +26,7 @@ namespace QR_game
         {
             //DrawHitboxes();
             //DrawAI();
+            Graphics.DrawText("hello world", new Vector2(10, 10), Color.Red);
         }
 
         public static void DrawHitboxes()

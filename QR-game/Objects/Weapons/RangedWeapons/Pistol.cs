@@ -1,4 +1,5 @@
-﻿using QR_game.Objects.Entities;
+﻿using QR_game.Drawing;
+using QR_game.Objects.Entities;
 using QR_game.Objects.Weapons.Bullets;
 using QR_game.Objects.Weapons.RangedWeapons;
 using SharpDX;
@@ -12,8 +13,8 @@ namespace QR_game.Objects.Weapons.RangedWeapons
             Ammo = 16;
             MaxAmmo = 16;
 
-            this.Width = 32;
-            this.Height = 16;
+            this.Width = 48;
+            this.Height = 24;
             this.Offset = new Vector2(6, 8);
             this.BarrelOffset = new Vector2(16, 2);
 

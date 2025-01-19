@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace QR_game
+namespace QR_game.Drawing
 {
     public static class Textures
     {
