@@ -1,6 +1,6 @@
 ﻿using QR_game.Drawing;
 using QR_game.Objects.Weapons;
-using QR_game.Objects.Weapons.RangedWeapon;
+using QR_game.Objects.Weapons.RangedWeapons;
 using System.Collections.Generic;
 
 namespace QR_game.Objects.Entities
@@ -15,7 +15,7 @@ namespace QR_game.Objects.Entities
                 24,
                 new Dictionary<string, List<int>>()
                 {
-                    { "idle", new List<int>() { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 3, 0, 1, 1 } },
+                    { "idle", new List<int>() { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 2, 3, 0, 1, 1, 1, 1 } },
                     { "run", new List<int>() { 4, 5, 6, 7, 7 } },
                 });
             _sprite.TimerDuration = 0.2f;

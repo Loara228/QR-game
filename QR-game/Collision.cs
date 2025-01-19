@@ -42,8 +42,8 @@ namespace QR_game
                 {
                     Vector2 point = points.Where(x => x != Vector2.Zero).OrderBy(x => Vector2.Distance(start, x)).ToList()[0];
                     result.Add((obj, point));
+                    i++;
                 }
-                i++;
             }
 
             return result.OrderBy(x => Vector2.Distance(start, x.point)).Cast<(T, Vector2) >();

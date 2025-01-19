@@ -19,11 +19,11 @@ namespace QR_game.Levels
             //this.Add(new EnemyQR(600, 200));
             //this.Add(new EnemyQR(650, 200));
             //this.Add(new EnemyQR(700, 200));
-            // со всех сторон
-            this.Add(new EnemyQR(550, 200));
-            this.Add(new EnemyQR(-550, -200));
-            this.Add(new EnemyQR(550, -900));
-            this.Add(new EnemyQR(-550, 700));
+            //// со всех сторон
+            //this.Add(new EnemyQR(550, 200));
+            //this.Add(new EnemyQR(-550, -200));
+            //this.Add(new EnemyQR(550, -900));
+            //this.Add(new EnemyQR(-550, 700));
         }
 
         private void AddBorder()

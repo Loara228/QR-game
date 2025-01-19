@@ -6,7 +6,7 @@ namespace QR_game.Objects.Blocks
     {
         public Block(float x, float y) : base(x, y)
         {
-            _sprite = new AnimatedSprite(Textures.GetTexture("null"), [null]);
+            //_sprite = new AnimatedSprite(Textures.GetTexture("null"), [null]);
             Width = 32;
             Height = 32;
             Collidable = true;

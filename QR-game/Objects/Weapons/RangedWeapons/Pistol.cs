@@ -1,10 +1,11 @@
 ﻿using QR_game.Objects.Entities;
 using QR_game.Objects.Weapons.Bullets;
+using QR_game.Objects.Weapons.RangedWeapons;
 using SharpDX;
 
-namespace QR_game.Objects.Weapons.RangedWeapon
+namespace QR_game.Objects.Weapons.RangedWeapons
 {
-    public class Pistol : Weapon
+    public class Pistol : RangedWeapon
     {
         public Pistol(Player owner) : base(owner)
         {
